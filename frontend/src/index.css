@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  font-family: 'Uber Move', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  background: #f6f8fa;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}

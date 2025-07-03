@@ -56,13 +56,16 @@
   border-radius: 6px;
 }
 
-.navbar-links li a:hover {
-  color: #ff8200;
+
+.navbar-links li a:hover,
+.navbar-links li button:hover {
+  color: #2563eb;
 }
 
+
 .navbar-links li button.active {
-  color: #ff8200;
-  background: #fff7f0;
+  color: #2563eb;
+  background: #e6f0ff;
   padding-bottom: 0.3rem;
   position: relative;
   border-bottom: none !important;
@@ -83,7 +86,7 @@
 }
 
 .navbar-links li button:hover {
-  color: #ff8200;
+  color: #2563eb;
 }
 
 .navbar-hamburger {

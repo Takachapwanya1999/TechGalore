@@ -22,7 +22,7 @@ export default function Navbar() {
       <nav className="navbar">
         <button
           className="navbar-dashboard-link"
-          style={{ background: 'none', border: 'none', color: '#ff8200', fontWeight: 700, fontSize: '1.1rem', cursor: 'pointer', padding: 0 }}
+          style={{ background: 'none', border: 'none', color: '#2563eb', fontWeight: 700, fontSize: '1.1rem', cursor: 'pointer', padding: 0 }}
           onClick={() => navigate('/')}
         >
           View Store

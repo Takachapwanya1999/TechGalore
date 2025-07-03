@@ -1,0 +1,99 @@
+.home-hero-img {
+  /* ...existing styles... */
+  position: relative;
+  z-index: 2;
+  transition: box-shadow 0.4s, filter 0.4s;
+}
+
+.home-hero-img:hover, .home-hero-img:focus {
+  box-shadow: 0 0 60px 20px #2563eb88, 0 8px 32px rgba(0,0,0,0.18);
+  filter: brightness(1.08) saturate(1.2);
+}
+/* Slide in for heading and description */
+/* Slower, smoother text animation */
+.home-hero-heading, .home-hero-desc {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: slideInUp 2.2s cubic-bezier(0.23, 1, 0.32, 1) 2.1s forwards;
+}
+.home-hero-desc {
+  animation-delay: 2.5s;
+}
+
+@keyframes slideInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Adjust button and image animation delays for sync */
+.cta-btn {
+  /* ...existing styles... */
+  animation-delay: 2.8s;
+  animation-duration: 2.2s;
+}
+.cta-btn.buy-btn {
+  animation-delay: 3.1s;
+}
+.home-hero-img {
+  /* ...existing styles... */
+  animation-delay: 3.5s;
+  animation-duration: 2.2s;
+}
+
+
+.cta-btn {
+  background: #2563eb;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  opacity: 0;
+  transform: translateX(-60px);
+  animation: slideInLeft 1.4s cubic-bezier(0.23, 1, 0.32, 1) 0.2s forwards;
+}
+
+.cta-btn.buy-btn {
+  animation-delay: 0.5s;
+}
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.cta-btn:hover, .cta-btn:focus {
+  background: #1e40af;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(37,99,235,0.15);
+}
+
+.home-hero-img {
+  opacity: 0;
+  transform: translateX(60px);
+  animation: slideInRight 1.6s cubic-bezier(0.23, 1, 0.32, 1) 0.4s forwards;
+}
+
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.sell-btn {
+  /* Optionally, add a different color for sell */
+}
+
+.buy-btn {
+  /* Optionally, add a different color for buy */
+}

@@ -1,0 +1,116 @@
+.searchbar-container {
+  background: #f7f7f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 1.2rem 1.5rem 1.5rem 1.5rem;
+  margin: 1.5rem auto 2.5rem auto;
+  max-width: 1200px;
+}
+
+.searchbar-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.tab {
+  background: #fff;
+  border: none;
+  border-radius: 10px 10px 0 0;
+  padding: 0.7rem 2.2rem 0.7rem 2.2rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #232f3e;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: background 0.2s, color 0.2s, border-bottom 0.2s;
+}
+.tab.active {
+  color: #2563eb;
+  border-bottom: 3px solid #2563eb;
+  background: #fff;
+}
+
+.searchbar-categories {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+}
+.category {
+  background: #232f3e;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.7rem 1.7rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.category.active, .category:hover {
+  background: #2563eb;
+  color: #fff;
+}
+.count {
+  font-weight: 500;
+  font-size: 0.98rem;
+  margin-left: 0.3rem;
+  color: #b5c7e6;
+}
+
+.searchbar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+}
+.searchbar-input {
+  flex: 1;
+  padding: 0.9rem 1.2rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: 1px solid #dbeafe;
+  background: #fff;
+  color: #232f3e;
+  outline: none;
+  transition: border 0.2s;
+}
+.searchbar-input:focus {
+  border: 1.5px solid #2563eb;
+}
+.searchbar-results {
+  color: #2563eb;
+  font-weight: 700;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.searchbar-search {
+  background: #2563eb;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 1.7rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.searchbar-search:hover {
+  background: #1e40af;
+}
+.searchbar-afford {
+  background: #232f3e;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 1.7rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.searchbar-afford:hover {
+  background: #2563eb;
+}

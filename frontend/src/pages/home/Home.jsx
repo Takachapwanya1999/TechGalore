@@ -1,6 +1,8 @@
 
 
+
 import pcImg from '../../assets/pc.png';
+
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 

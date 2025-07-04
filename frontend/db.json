@@ -1,0 +1,144 @@
+{
+  "laptops": [
+    {
+      "id": 1,
+      "image": "https://m.media-amazon.com/images/I/71TPda7cwUL._AC_SL1500_.jpg",
+      "title": "Dell XPS 13 (2022)",
+      "price": 16999,
+      "condition": "Used",
+      "cpu": "Intel i7-1165G7",
+      "ram": "16GB",
+      "storage": "512GB SSD"
+    },
+    {
+      "id": 2,
+      "image": "https://m.media-amazon.com/images/I/61jLiCovxVL._AC_SL1500_.jpg",
+      "title": "Apple MacBook Pro 14\" (M1)",
+      "price": 28999,
+      "condition": "New",
+      "cpu": "Apple M1",
+      "ram": "16GB",
+      "storage": "1TB SSD"
+    },
+    {
+      "id": 3,
+      "image": "https://m.media-amazon.com/images/I/81m1s4wIPML._AC_SL1500_.jpg",
+      "title": "HP Spectre x360",
+      "price": 18999,
+      "condition": "Used",
+      "cpu": "Intel i5-1135G7",
+      "ram": "8GB",
+      "storage": "256GB SSD"
+    },
+    {
+      "id": 4,
+      "image": "https://m.media-amazon.com/images/I/71pC69I3lzL._AC_SL1500_.jpg",
+      "title": "Lenovo ThinkPad X1 Carbon",
+      "price": 22999,
+      "condition": "New",
+      "cpu": "Intel i7-1260P",
+      "ram": "16GB",
+      "storage": "512GB SSD"
+    },
+    {
+      "id": 5,
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80",
+      "title": "ASUS ZenBook 14 OLED",
+      "price": 17999,
+      "condition": "New",
+      "cpu": "AMD Ryzen 7 5800U",
+      "ram": "16GB",
+      "storage": "1TB SSD"
+    },
+    {
+      "id": 6,
+      "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
+      "title": "Acer Swift 3",
+      "price": 13999,
+      "condition": "Used",
+      "cpu": "Intel i5-1240P",
+      "ram": "8GB",
+      "storage": "512GB SSD"
+    },
+    {
+      "id": 7,
+      "image": "https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_SL1500_.jpg",
+      "title": "Microsoft Surface Laptop 5",
+      "price": 20999,
+      "condition": "New",
+      "cpu": "Intel i7-1255U",
+      "ram": "16GB",
+      "storage": "512GB SSD"
+    },
+    {
+      "id": 8,
+      "image": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80",
+      "title": "Razer Blade 15",
+      "price": 31999,
+      "condition": "Used",
+      "cpu": "Intel i7-11800H",
+      "ram": "16GB",
+      "storage": "1TB SSD"
+    },
+    {
+      "id": 9,
+      "image": "https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_SL1500_.jpg",
+      "title": "MSI Stealth 15M",
+      "price": 24999,
+      "condition": "New",
+      "cpu": "Intel i7-11375H",
+      "ram": "16GB",
+      "storage": "512GB SSD"
+    },
+    {
+      "id": 10,
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80",
+      "title": "ASUS ROG Zephyrus G14",
+      "price": 27999,
+      "condition": "Used",
+      "cpu": "AMD Ryzen 9 5900HS",
+      "ram": "32GB",
+      "storage": "1TB SSD"
+    },
+    {
+      "id": 11,
+      "image": "https://m.media-amazon.com/images/I/81m1s4wIPML._AC_SL1500_.jpg",
+      "title": "HP Envy 13",
+      "price": 16999,
+      "condition": "New",
+      "cpu": "Intel i5-1135G7",
+      "ram": "8GB",
+      "storage": "256GB SSD"
+    },
+    {
+      "id": 12,
+      "image": "https://m.media-amazon.com/images/I/71pC69I3lzL._AC_SL1500_.jpg",
+      "title": "Lenovo Yoga 7i",
+      "price": 18999,
+      "condition": "Used",
+      "cpu": "Intel i7-1165G7",
+      "ram": "12GB",
+      "storage": "512GB SSD"
+    },
+    {
+      "id": 13,
+      "image": "https://m.media-amazon.com/images/I/61jLiCovxVL._AC_SL1500_.jpg",
+      "title": "Apple MacBook Air 13\" (M2)",
+      "price": 21999,
+      "condition": "New",
+      "cpu": "Apple M2",
+      "ram": "8GB",
+      "storage": "512GB SSD"
+    },
+    {
+      "id": 14,
+      "image": "https://m.media-amazon.com/images/I/71TPda7cwUL._AC_SL1500_.jpg",
+      "title": "Dell Inspiron 15 3000",
+      "price": 10999,
+      "condition": "Used",
+      "cpu": "Intel i3-1115G4",
+      "ram": "8GB",
+      "storage": "256GB SSD"
+    }
+  ]
+}

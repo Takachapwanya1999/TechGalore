@@ -97,3 +97,8 @@
 .buy-btn {
   /* Optionally, add a different color for buy */
 }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #d8d8d8;
+}

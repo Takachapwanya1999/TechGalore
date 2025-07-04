@@ -1,9 +1,14 @@
-export default function SearchBar() {
+import './SearchBar.css';
+
+// ...existing code...
+export default function SearchBar({ value, onChange, onSearch }) {
   return (
     <div style={{ padding: '2rem', textAlign: 'center' }}>
       <input
         type="text"
-        placeholder="Search for cars, models, or services..."
+        placeholder="Search for laptops, models, or brands..."
+        value={value}
+        onChange={e => onChange(e.target.value)}
         style={{
           width: '60%',
           padding: '0.75rem 1rem',
@@ -12,6 +17,7 @@ export default function SearchBar() {
           border: '1px solid #ccc',
           boxShadow: '0 1px 4px rgba(0,0,0,0.04)'
         }}
+        onKeyDown={e => { if (e.key === 'Enter') onSearch(); }}
       />
       <button
         style={{
@@ -24,6 +30,7 @@ export default function SearchBar() {
           color: '#fff',
           cursor: 'pointer'
         }}
+        onClick={onSearch}
       >
         Search
       </button>

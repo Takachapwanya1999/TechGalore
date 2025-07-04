@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import Navbar from './components/Navbar';
 
 import Home from './pages/home/Home';
@@ -13,6 +14,8 @@ import About from './pages/about/About';
 import Contact from './pages/contact/Contact';
 import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
+import Cart from './pages/cart/Cart';
+import Checkout from './pages/checkout/Checkout';
 
 const App = () => {
   return (
@@ -29,6 +32,8 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

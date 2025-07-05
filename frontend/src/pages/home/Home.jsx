@@ -3,44 +3,66 @@
 
 import pcImg from '../../assets/pc.png';
 
+
 import { useNavigate } from 'react-router-dom';
+import { useRef, useState } from 'react';
+import './HomeTransition.css';
 import './Home.css';
+
 
 export default function Home() {
   const navigate = useNavigate();
+  const rootRef = useRef(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const handleAnimatedNavigate = (to) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    if (rootRef.current) {
+      rootRef.current.classList.add('fade-exit');
+      setTimeout(() => {
+        rootRef.current.classList.add('fade-exit-active');
+      }, 10);
+      setTimeout(() => {
+        navigate(to);
+      }, 410);
+    } else {
+      navigate(to);
+    }
+  };
+
   return (
-    <div style={{ background: '#232f3e', color: '#fff', minHeight: 'calc(100vh - 80px)', padding: '3rem 0 0 0', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-      <div style={{ maxWidth: 700, marginLeft: '4vw' }}>
-        <h1 className="home-hero-heading" style={{ fontSize: '2.8rem', fontWeight: 800, marginBottom: '1rem', letterSpacing: '-2px' }}>
-          CLICK YOUR NEXT
-        </h1>
-        <p className="home-hero-desc" style={{ fontSize: '1.25rem', marginBottom: '2.5rem', color: '#e0e0e0' }}>
+    <div ref={rootRef} className="home-root">
+      <div className="home-content">
+        <h1 className="home-hero-heading">CLICK YOUR NEXT</h1>
+        <p className="home-hero-desc">
           Quick. Easy. Simple. Buy or sell your laptop today with immediate payment.
         </p>
-        <div style={{ display: 'flex', gap: '1.5rem' }}>
+        <div className="home-btn-row">
           <button
             className="cta-btn sell-btn"
-            onClick={() => navigate('/sell')}
+            onClick={() => handleAnimatedNavigate('/sell')}
+            disabled={isTransitioning}
           >
             SELL MY LAPTOP &rsaquo;
           </button>
           <button
             className="cta-btn buy-btn"
-            onClick={() => navigate('/buy')}
+            onClick={() => handleAnimatedNavigate('/buy')}
+            disabled={isTransitioning}
           >
             BUY A LAPTOP &rsaquo;
           </button>
         </div>
       </div>
-      <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div className="home-img-container">
         <img
           src={pcImg}
           alt="Laptop"
           className="home-hero-img"
-          style={{ maxWidth: 480, width: '100%', borderRadius: '1.5rem', boxShadow: '0 8px 32px rgba(0,0,0,0.18)' }}
         />
       </div>
-      <div style={{ position: 'absolute', left: 0, bottom: '-60px', width: '100%', height: '32px', background: '#232f3e', zIndex: 1 }} />
+      <div className="home-footer-bg" />
     </div>
   );
 }

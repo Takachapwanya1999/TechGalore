@@ -9,7 +9,6 @@ import NotFound from './pages/NotFound';
 import Buy from './pages/buy/Buy';
 import Sell from './pages/sell/Sell';
 import Finance from './pages/finance/Finance';
-import Locations from './pages/locations/Locations';
 import About from './pages/about/About';
 import Contact from './pages/contact/Contact';
 import Signup from './pages/signup/Signup';

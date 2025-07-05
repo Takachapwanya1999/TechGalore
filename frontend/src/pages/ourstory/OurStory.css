@@ -1,0 +1,38 @@
+.ourstory-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(60,60,60,0.07);
+}
+.ourstory-title {
+  color: #2563eb;
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+.ourstory-p1 {
+  font-size: 1.1rem;
+  color: #232f3e;
+  margin-bottom: 18px;
+}
+.ourstory-p2 {
+  font-size: 1.05rem;
+  color: #444;
+  margin-bottom: 18px;
+}
+.ourstory-milestones-title,
+.ourstory-lookingahead-title {
+  color: #2563eb;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.ourstory-milestones-list {
+  font-size: 1.05rem;
+  color: #444;
+  margin-bottom: 18px;
+  padding-left: 22px;
+}
+.ourstory-lookingahead-p {
+  margin-bottom: 18px;
+}

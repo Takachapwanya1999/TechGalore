@@ -1,0 +1,9 @@
+.fade-exit {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.4s cubic-bezier(.4,0,.2,1), transform 0.4s cubic-bezier(.4,0,.2,1);
+}
+.fade-exit-active {
+  opacity: 0;
+  transform: scale(0.97);
+}

@@ -80,6 +80,7 @@
   box-shadow: none;
 }
 
+
 .navbar-links li button.active::after,
 .navbar-links li a.active::after {
   content: '';
@@ -93,7 +94,22 @@
   border-radius: 2px;
   width: 0%;
   margin: 0 auto;
-  animation: navbar-underline-grow 0.5s cubic-bezier(.4,0,.2,1) forwards;
+  animation: navbar-underline-grow 0.25s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+@keyframes navbar-underline-grow {
+  from {
+    width: 0%;
+    opacity: 0.2;
+  }
+  60% {
+    width: 110%;
+    opacity: 1;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
 }
 
 @keyframes navbar-underline-grow {

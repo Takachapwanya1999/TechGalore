@@ -1,3 +1,61 @@
+/* Home page layout and transition classes */
+.home-root {
+  background: #232f3e;
+  color: #fff;
+  min-height: calc(100vh - 80px);
+  padding: 3rem 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.home-content {
+  max-width: 700px;
+  margin-left: 4vw;
+}
+
+.home-hero-heading {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -2px;
+}
+
+.home-hero-desc {
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+  color: #e0e0e0;
+}
+
+.home-btn-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.home-img-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-hero-img {
+  max-width: 480px;
+  width: 100%;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+
+.home-footer-bg {
+  position: absolute;
+  left: 0;
+  bottom: -60px;
+  width: 100%;
+  height: 32px;
+  background: #232f3e;
+  z-index: 1;
+}
 .home-hero-img {
   /* ...existing styles... */
   position: relative;

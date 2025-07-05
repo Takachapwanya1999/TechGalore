@@ -34,8 +34,12 @@ export default function AboutCarousel() {
       slidesPerView={3}
       spaceBetween={32}
       loop={true}
-      autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true, waitForTransition: false, reverseDirection: false, stopOnLastSlide: false, speed: 3500 }}
-      speed={3500}
+      autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false }}
+      speed={12000}
+      freeMode={true}
+      freeModeMomentum={false}
+      freeModeSticky={false}
+      cssMode={false}
       allowTouchMove={false}
       className="about-carousel-swiper"
       breakpoints={{

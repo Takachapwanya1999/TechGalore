@@ -26,7 +26,7 @@ export default function DashboardCharts() {
   ];
 
   useEffect(() => {
-    fetch('http://localhost:3001/laptops')
+    fetch('http://localhost:3001/products')
       .then(res => res.json())
       .then(data => {
         setProducts(data);

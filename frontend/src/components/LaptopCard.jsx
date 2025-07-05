@@ -1,22 +1,14 @@
+import React from 'react';
+import { useAuthCart } from '../context/AuthCartContext';
 import './LaptopCard.css';
 
 export default function LaptopCard({ laptop }) {
-  // Add to cart handler
+  const { addToCart } = useAuthCart();
+
   const handleAddToCart = () => {
-    let cart;
-    try {
-      cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    } catch {
-      cart = [];
-    }
-    if (!Array.isArray(cart)) cart = [];
-    if (!cart.includes(laptop.id)) {
-      cart.push(laptop.id);
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
-    // Always notify other components in this tab, even if cart didn't change
-    window.dispatchEvent(new Event('cart-updated'));
+    addToCart(laptop);
   };
+
   return (
     <div className="laptop-card">
       <div className="laptop-card-img-wrapper">
@@ -28,8 +20,16 @@ export default function LaptopCard({ laptop }) {
       </div>
       <div className="laptop-card-body">
         <div className="laptop-card-header">
-          <span className={`laptop-card-condition ${laptop.condition === 'New' ? 'new' : 'used'}`}>{laptop.condition}</span>
-          <span className="laptop-card-price">{laptop.priceDisplay || `R ${laptop.price.toLocaleString()}`}</span>
+          <span
+            className={`laptop-card-condition ${
+              laptop.condition === 'New' ? 'new' : 'used'
+            }`}
+          >
+            {laptop.condition}
+          </span>
+          <span className="laptop-card-price">
+            {laptop.priceDisplay || `R ${laptop.price.toLocaleString()}`}
+          </span>
         </div>
         <h3 className="laptop-card-title">{laptop.title}</h3>
         <div className="laptop-card-details">
@@ -40,7 +40,12 @@ export default function LaptopCard({ laptop }) {
           <span>{laptop.storage}</span>
         </div>
         <div className="laptop-card-footer">
-          <button className="laptop-card-cart" onClick={handleAddToCart}>Add to Cart</button>
+          <button
+            className="laptop-card-cart"
+            onClick={handleAddToCart}
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>

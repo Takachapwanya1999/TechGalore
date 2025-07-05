@@ -1,45 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuthCart } from '../../context/AuthCartContext';
 
 export default function Cart() {
   const [cartLaptops, setCartLaptops] = useState([]);
   const navigate = useNavigate();
+  const { cart, removeFromCart, updateQuantity, getCartTotal, isConnected } = useAuthCart();
 
-  // Fetch cart laptops, refetch when cart changes
   useEffect(() => {
     const fetchCartLaptops = () => {
-      let cart;
-      try {
-        cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      } catch {
-        cart = [];
-      }
       if (!Array.isArray(cart) || cart.length === 0) {
         setCartLaptops([]);
         return;
       }
-      fetch('http://localhost:3001/laptops')
+
+      const cartIds = cart.map(item => item.id);
+
+      fetch('http://localhost:3001/products')
         .then(res => res.json())
         .then(data => {
-          const laptops = data.filter(l => cart.includes(l.id));
+          const laptops = data
+            .filter(l => cartIds.includes(l.id))
+            .map(l => {
+              const match = cart.find(item => item.id === l.id);
+              return { ...l, quantity: match.quantity };
+            });
           setCartLaptops(laptops);
+        })
+        .catch(error => {
+          console.error('Error fetching laptops:', error);
+          // Fallback to cart data if API fails
+          setCartLaptops(cart);
         });
     };
-    fetchCartLaptops();
-    // Listen for cart-updated event to refresh cart
-    window.addEventListener('cart-updated', fetchCartLaptops);
-    return () => window.removeEventListener('cart-updated', fetchCartLaptops);
-  }, []);
 
-  const total = cartLaptops.reduce((sum, l) => sum + (l.price || 0), 0);
-  // Store total in localStorage for checkout page
-  useEffect(() => {
-    if (cartLaptops.length > 0) {
-      localStorage.setItem('cartTotal', total.toString());
-    } else {
-      localStorage.removeItem('cartTotal');
-    }
-  }, [total, cartLaptops.length]);
+    fetchCartLaptops();
+  }, [cart]);
+
+  const total = getCartTotal();
 
   return (
     <div style={{ padding: '2rem', marginTop: '7rem' }}>
@@ -59,35 +57,41 @@ export default function Cart() {
                 <th style={{ padding: '1rem', textAlign: 'left' }}>CPU</th>
                 <th style={{ padding: '1rem', textAlign: 'left' }}>RAM</th>
                 <th style={{ padding: '1rem', textAlign: 'left' }}>Storage</th>
+                <th style={{ padding: '1rem', textAlign: 'left' }}>Quantity</th>
                 <th style={{ padding: '1rem', textAlign: 'left' }}>Price</th>
+                <th style={{ padding: '1rem', textAlign: 'left' }}>Actions</th>
               </tr>
             </thead>
             <tbody>
               {cartLaptops.map(laptop => (
                 <tr key={laptop.id}>
-                  <td style={{ padding: '0.7rem' }}><img src={laptop.image} alt={laptop.title} style={{ width: 70, borderRadius: 6 }} /></td>
+                  <td style={{ padding: '0.7rem' }}>
+                    <img src={laptop.image} alt={laptop.title} style={{ width: 70, borderRadius: 6 }} />
+                  </td>
                   <td style={{ padding: '0.7rem' }}>{laptop.title}</td>
                   <td style={{ padding: '0.7rem' }}>{laptop.condition}</td>
                   <td style={{ padding: '0.7rem' }}>{laptop.cpu}</td>
                   <td style={{ padding: '0.7rem' }}>{laptop.ram}</td>
                   <td style={{ padding: '0.7rem' }}>{laptop.storage}</td>
-                  <td style={{ padding: '0.7rem', fontWeight: 600 }}>R {laptop.price.toLocaleString()}</td>
+                  <td style={{ padding: '0.7rem' }}>{laptop.quantity}</td>
+                  <td style={{ padding: '0.7rem', fontWeight: 600 }}>
+                    R {(laptop.price * laptop.quantity).toLocaleString()}
+                  </td>
                   <td style={{ padding: '0.7rem' }}>
                     <button
-                      style={{ background: '#e53935', color: '#fff', border: 'none', borderRadius: 4, padding: '0.4rem 1rem', fontWeight: 600, cursor: 'pointer' }}
-                      onClick={() => {
-                        let cart;
-                        try {
-                          cart = JSON.parse(localStorage.getItem('cart') || '[]');
-                        } catch {
-                          cart = [];
-                        }
-                        if (!Array.isArray(cart)) cart = [];
-                        cart = cart.filter(id => id !== laptop.id);
-                        localStorage.setItem('cart', JSON.stringify(cart));
-                        window.dispatchEvent(new Event('cart-updated'));
+                      style={{
+                        background: '#e53935',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: 4,
+                        padding: '0.4rem 1rem',
+                        fontWeight: 600,
+                        cursor: 'pointer'
                       }}
-                    >Remove</button>
+                      onClick={() => removeFromCart(laptop.id)}
+                    >
+                      Remove
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -98,7 +102,17 @@ export default function Cart() {
               Total: R {total.toLocaleString()}
             </div>
             <button
-              style={{ background: '#1976d2', color: '#fff', border: 'none', borderRadius: 6, padding: '0.9rem 2.5rem', fontSize: '1.1rem', fontWeight: 600, cursor: 'pointer', boxShadow: '0 2px 8px rgba(25,118,210,0.08)' }}
+              style={{
+                background: '#1976d2',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 6,
+                padding: '0.9rem 2.5rem',
+                fontSize: '1.1rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                boxShadow: '0 2px 8px rgba(25,118,210,0.08)'
+              }}
               onClick={() => navigate('/checkout')}
             >
               Proceed to Payment & Delivery

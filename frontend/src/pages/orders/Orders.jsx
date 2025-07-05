@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import socket from '../../utils/socket';
+import { useAuthCart } from '../../context/AuthCartContext';
+import { FiCheck, FiWifi, FiWifiOff } from 'react-icons/fi';
 import './Orders.css';
 import OrderTimeline from '../../components/OrderTimeline';
 import '../../components/OrderTimeline.css';
@@ -17,6 +19,7 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { isConnected } = useAuthCart();
 
   const fetchOrders = useCallback(async () => {
     setLoading(true);
@@ -51,7 +54,19 @@ const Orders = () => {
 
   return (
     <div className="orders-page">
-      <h1 style={{color:'#2563eb',fontWeight:800,letterSpacing:'-1px',marginBottom:32}}>Your Orders</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+        <h1 style={{color:'#2563eb',fontWeight:800,letterSpacing:'-1px'}}>Your Orders</h1>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          {isConnected ? (
+            <FiWifi style={{ fontSize: '1rem', color: '#059669' }} />
+          ) : (
+            <FiWifiOff style={{ fontSize: '1rem', color: '#dc2626' }} />
+          )}
+          <span style={{ fontSize: '0.875rem', color: isConnected ? '#059669' : '#dc2626' }}>
+            {isConnected ? 'Live Updates' : 'Offline Mode'}
+          </span>
+        </div>
+      </div>
       {orders.length === 0 ? (
         <div style={{color:'#888',fontWeight:600}}>No orders found.</div>
       ) : orders.map(order => (

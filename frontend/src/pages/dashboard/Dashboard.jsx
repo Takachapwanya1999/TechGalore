@@ -97,28 +97,61 @@ export default function Dashboard() {
     localStorage.setItem('dashboardOrders', JSON.stringify(orders));
   }, [orders]);
 
-  const handleAddProduct = () => {
+  const handleAddProduct = async () => {
     if (newProduct.name && newProduct.category && newProduct.price && newProduct.stock) {
       const product = {
-        id: products.length + 1,
-        ...newProduct,
+        id: (products.length + 1).toString(),
+        title: newProduct.name,
+        name: newProduct.name,
         price: parseFloat(newProduct.price),
-        stock: parseInt(newProduct.stock)
+        stock: parseInt(newProduct.stock),
+        category: newProduct.category,
+        description: newProduct.description,
+        cpu: newProduct.processor,
+        processor: newProduct.processor,
+        ram: newProduct.ram,
+        storage: newProduct.storage,
+        condition: newProduct.condition,
+        image: newProduct.image || 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80',
+        details: [
+          `${newProduct.processor} • ${newProduct.ram} • ${newProduct.storage}`,
+          `Condition: ${newProduct.condition}`
+        ]
       };
-      setProducts([...products, product]);
-      setNewProduct({ 
-        name: '', 
-        category: '', 
-        price: '', 
-        stock: '', 
-        description: '', 
-        processor: processorOptions[0], 
-        ram: ramOptions[0], 
-        storage: storageOptions[0], 
-        condition: conditionOptions[0], 
-        image: '' 
-      });
-      setShowAddProduct(false);
+
+      try {
+        const response = await fetch('http://localhost:3001/products', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(product)
+        });
+
+        if (response.ok) {
+          const savedProduct = await response.json();
+          setProducts([...products, savedProduct]);
+          setNewProduct({ 
+            name: '', 
+            category: '', 
+            price: '', 
+            stock: '', 
+            description: '', 
+            processor: processorOptions[0], 
+            ram: ramOptions[0], 
+            storage: storageOptions[0], 
+            condition: conditionOptions[0], 
+            image: '' 
+          });
+          setShowAddProduct(false);
+          alert('Product added successfully!');
+        } else {
+          alert('Failed to add product. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error adding product:', error);
+        alert('Error adding product. Please check your connection.');
+      }
     }
   };
 
@@ -128,35 +161,83 @@ export default function Dashboard() {
     setShowAddProduct(true);
   };
 
-  const handleUpdateProduct = () => {
+  const handleUpdateProduct = async () => {
     if (editingProduct && newProduct.name && newProduct.category && newProduct.price && newProduct.stock) {
-      const updatedProducts = products.map(p => p.id === editingProduct.id ? {
-        ...p,
-        ...newProduct,
+      const updatedProduct = {
+        ...editingProduct,
+        title: newProduct.name,
+        name: newProduct.name,
         price: parseFloat(newProduct.price),
-        stock: parseInt(newProduct.stock)
-      } : p);
-      setProducts(updatedProducts);
-      setEditingProduct(null);
-      setNewProduct({ 
-        name: '', 
-        category: '', 
-        price: '', 
-        stock: '', 
-        description: '', 
-        processor: processorOptions[0], 
-        ram: ramOptions[0], 
-        storage: storageOptions[0], 
-        condition: conditionOptions[0], 
-        image: '' 
-      });
-      setShowAddProduct(false);
+        stock: parseInt(newProduct.stock),
+        category: newProduct.category,
+        description: newProduct.description,
+        cpu: newProduct.processor,
+        processor: newProduct.processor,
+        ram: newProduct.ram,
+        storage: newProduct.storage,
+        condition: newProduct.condition,
+        image: newProduct.image || editingProduct.image,
+        details: [
+          `${newProduct.processor} • ${newProduct.ram} • ${newProduct.storage}`,
+          `Condition: ${newProduct.condition}`
+        ]
+      };
+
+      try {
+        const response = await fetch(`http://localhost:3001/products/${editingProduct.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedProduct)
+        });
+
+        if (response.ok) {
+          const savedProduct = await response.json();
+          const updatedProducts = products.map(p => p.id === editingProduct.id ? savedProduct : p);
+          setProducts(updatedProducts);
+          setEditingProduct(null);
+          setNewProduct({ 
+            name: '', 
+            category: '', 
+            price: '', 
+            stock: '', 
+            description: '', 
+            processor: processorOptions[0], 
+            ram: ramOptions[0], 
+            storage: storageOptions[0], 
+            condition: conditionOptions[0], 
+            image: '' 
+          });
+          setShowAddProduct(false);
+          alert('Product updated successfully!');
+        } else {
+          alert('Failed to update product. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error updating product:', error);
+        alert('Error updating product. Please check your connection.');
+      }
     }
   };
 
-  const handleDeleteProduct = (id) => {
+  const handleDeleteProduct = async (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
-      setProducts(products.filter(p => p.id !== id));
+      try {
+        const response = await fetch(`http://localhost:3001/products/${id}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          setProducts(products.filter(p => p.id !== id));
+          alert('Product deleted successfully!');
+        } else {
+          alert('Failed to delete product. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error deleting product:', error);
+        alert('Error deleting product. Please check your connection.');
+      }
     }
   };
 

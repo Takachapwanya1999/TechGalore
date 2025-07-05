@@ -1,7 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../pages/dashboard/assets/logo.png';
 import { FiShoppingBag } from 'react-icons/fi';
-import { useState, useEffect } from 'react';
+import { useAuthCart } from '../context/AuthCartContext';
+import CartModal from './CartModal';
+import { useState } from 'react';
 import './Navbar.css';
 
 const navItems = [
@@ -10,7 +12,7 @@ const navItems = [
   { key: 'orders', label: 'Orders', path: '/orders' },
   { key: 'finance', label: 'Financing & Support', path: '/finance' },
   { key: 'locations', label: 'Store Locator', path: '/locations' },
-  { key: 'about', label: 'Our Story', path: '/about' },
+  { key: 'about', label: 'Our Story', path: '/ourstory' },
   { key: 'contact', label: 'Contact', path: '/contact' },
   { key: 'cart', label: 'Cart', path: '/cart' },
   { key: 'signup', label: 'Sign Up', path: '/signup' },
@@ -22,51 +24,9 @@ export default function Navbar() {
   const isDashboard = location.pathname.startsWith('/dashboard');
   // Simulate logged in state
   const loggedIn = true;
-  // Real cart count from localStorage (or default 0)
-  const [cartCount, setCartCount] = useState(() => {
-    // Ensure initial cart count is always 0 if cart is missing or invalid
-    let cart;
-    try {
-      cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    } catch {
-      cart = [];
-    }
-    if (!Array.isArray(cart)) {
-      localStorage.setItem('cart', '[]');
-      return 0;
-    }
-    return cart.length;
-  });
-
-  useEffect(() => {
-    // Set initial cart count
-    const updateCartCount = () => {
-      let cart;
-      try {
-        cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      } catch {
-        cart = [];
-        localStorage.setItem('cart', '[]');
-      }
-      if (!Array.isArray(cart)) {
-        cart = [];
-        localStorage.setItem('cart', '[]');
-      }
-      setCartCount(cart.length);
-    };
-    updateCartCount();
-    // Listen for cart changes in this tab
-    window.addEventListener('cart-updated', updateCartCount);
-    // Listen for changes from other tabs
-    const handleStorage = (e) => {
-      if (e.key === 'cart') updateCartCount();
-    };
-    window.addEventListener('storage', handleStorage);
-    return () => {
-      window.removeEventListener('cart-updated', updateCartCount);
-      window.removeEventListener('storage', handleStorage);
-    };
-  }, []);
+  // Get cart data from context
+  const { cartCount, isConnected } = useAuthCart();
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
 
   if (isDashboard) {
     return (
@@ -106,7 +66,7 @@ export default function Navbar() {
           if (item.key === 'cart') {
             return (
               <li key={item.key} style={{ position: 'relative' }}>
-                <button onClick={() => navigate(item.path)} style={{ position: 'relative', display: 'flex', alignItems: 'center', fontSize: '1.3rem' }}>
+                <button onClick={() => setIsCartModalOpen(true)} style={{ position: 'relative', display: 'flex', alignItems: 'center', fontSize: '1.3rem' }}>
                   <FiShoppingBag style={{ fontSize: '1.5rem', marginRight: 2 }} />
                   {cartCount > 0 && (
                     <span style={{
@@ -153,6 +113,11 @@ export default function Navbar() {
           );
         })}
       </ul>
+      
+      <CartModal 
+        isOpen={isCartModalOpen} 
+        onClose={() => setIsCartModalOpen(false)} 
+      />
     </nav>
   );
 }

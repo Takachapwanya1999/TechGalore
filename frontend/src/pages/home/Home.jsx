@@ -1,19 +1,19 @@
-
-
-
 import pcImg from '../../assets/pc.png';
-
+import pcImg2 from '../../assets/pc2.png';
+import useImageSwitcher from '../../hooks/useImageSwitcher';
 
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import './HomeTransition.css';
 import './Home.css';
 
-
 export default function Home() {
   const navigate = useNavigate();
   const rootRef = useRef(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Use the custom hook for image switching
+  const { imgSrc, isFading, handleMouseEnter, handleMouseLeave } = useImageSwitcher(pcImg, pcImg2, 200);
 
   const handleAnimatedNavigate = (to) => {
     if (isTransitioning) return;
@@ -56,13 +56,17 @@ export default function Home() {
         </div>
       </div>
       <div className="home-img-container">
-        <img
-          src={pcImg}
-          alt="Laptop"
-          className="home-hero-img"
-        />
+        <div className="image-hover-container">
+          <img
+            src={imgSrc}
+            alt="Laptop"
+            className={`home-hero-img fade-img${isFading ? ' fading' : ''}`}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            draggable={false}
+          />
+        </div>
       </div>
-      <div className="home-footer-bg" />
     </div>
   );
 }

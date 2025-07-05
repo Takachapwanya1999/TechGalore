@@ -36,9 +36,11 @@ export default function AboutCarousel() {
       loop={true}
       autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false }}
       speed={12000}
-      freeMode={true}
-      freeModeMomentum={false}
-      freeModeSticky={false}
+      freeMode={{
+        enabled: true,
+        momentum: false,
+        sticky: false
+      }}
       cssMode={false}
       allowTouchMove={false}
       className="about-carousel-swiper"

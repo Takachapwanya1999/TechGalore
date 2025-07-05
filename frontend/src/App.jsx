@@ -16,6 +16,7 @@ import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
 import Cart from './pages/cart/Cart';
 import Checkout from './pages/checkout/Checkout';
+import Orders from './pages/orders/Orders';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/orders" element={<Orders />} />
         <Route path="/buy" element={<Buy />} />
         <Route path="/sell" element={<Sell />} />
         <Route path="/finance" element={<Finance />} />

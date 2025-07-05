@@ -16,18 +16,13 @@
   box-shadow: 0 2px 12px 0 rgba(0,0,0,0.06);
 }
 
-.navbar-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  margin-right: 2rem;
-  color: #232f3e;
-  white-space: nowrap;
-  align-self: center;
-  line-height: 1;
+.navbar-logo img {
   display: flex;
-  align-items: center;
   height: 100%;
+  background-color: #fff;
+  min-width: fit-content;
+  filter: brightness(1.1) contrast(1.2);
+  padding: 10px;
 }
 
 .navbar-links {
@@ -75,26 +70,45 @@
 }
 
 
-.navbar-links li button.active {
+
+.navbar-links li button.active,
+.navbar-links li a.active {
   color: #2563eb;
-  background: #e6f0ff;
+  background: none;
   padding-bottom: 0.3rem;
   position: relative;
-  border-bottom: none !important;
+  box-shadow: none;
 }
 
-.navbar-links li button.active::after {
+.navbar-links li button.active::after,
+.navbar-links li a.active::after {
   content: '';
   display: block;
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -30px;
-  height: 4px;
-  background: #232f3e;
+  bottom: -40px;
+  height: 3px;
+  background: #2563eb;
   border-radius: 2px;
-  width: 100%;
+  width: 0%;
   margin: 0 auto;
+  animation: navbar-underline-grow 0.5s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+@keyframes navbar-underline-grow {
+  from {
+    width: 0%;
+    opacity: 0.2;
+  }
+  60% {
+    width: 110%;
+    opacity: 1;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
 }
 
 .navbar-links li button:hover {

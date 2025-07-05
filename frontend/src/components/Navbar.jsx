@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import logo from '../pages/dashboard/assets/logo.png';
 import { FiShoppingBag } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
 import './Navbar.css';
@@ -6,6 +7,7 @@ import './Navbar.css';
 const navItems = [
   { key: 'buy', label: 'Shop Laptops', path: '/buy' },
   { key: 'sell', label: 'Sell a Device', path: '/sell' },
+  { key: 'orders', label: 'Orders', path: '/orders' },
   { key: 'finance', label: 'Financing & Support', path: '/finance' },
   { key: 'locations', label: 'Store Locator', path: '/locations' },
   { key: 'about', label: 'Our Story', path: '/about' },
@@ -84,10 +86,10 @@ export default function Navbar() {
     <nav className="navbar">
       <div
         className="navbar-logo"
-        style={{ cursor: 'pointer' }}
+        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
         onClick={() => navigate('/')}
       >
-        Technology Galore
+        <img src={logo} alt="Logo" style={{ height: 40, width: 40, objectFit: 'contain' }} />
       </div>
       <button
         className="navbar-hamburger"
@@ -141,7 +143,10 @@ export default function Navbar() {
           }
           return (
             <li key={item.key}>
-              <button onClick={() => navigate(item.path)}>
+              <button
+                className={location.pathname === item.path ? 'active' : ''}
+                onClick={() => navigate(item.path)}
+              >
                 {item.label}
               </button>
             </li>

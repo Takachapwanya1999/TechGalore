@@ -12,9 +12,9 @@ export default function Buy() {
   const [maxPrice, setMaxPrice] = useState('');
   const [allBrands, setAllBrands] = useState([]);
 
-  // Fetch all laptops, filter on frontend for multi-field search and filters
+  // Fetch all products (laptops), filter on frontend for multi-field search and filters
   const fetchLaptops = (query = "", cond = condition, br = brand, minP = minPrice, maxP = maxPrice) => {
-    let url = 'http://localhost:3001/laptops';
+    let url = 'http://localhost:4000/products';
     fetch(url)
       .then(res => res.json())
       .then(data => {

@@ -1,0 +1,143 @@
+.orders-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+.order-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.08);
+  margin-bottom: 32px;
+  padding: 24px;
+}
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+  font-size: 1.13rem;
+  font-weight: 700;
+  color: #222;
+}
+.order-id {
+  font-weight: 700;
+  color: #222;
+}
+.order-date {
+  color: #444;
+  font-weight: 500;
+}
+.order-total {
+  color: #059669;
+  font-weight: 700;
+  font-size: 1.08rem;
+}
+.order-content {
+  display: grid;
+  grid-template-columns: 2.2fr 1.2fr 1.6fr;
+  gap: 32px;
+  align-items: flex-start;
+  margin-top: 8px;
+}
+.order-merchant {
+  min-width: 180px;
+}
+.order-merchant img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  box-shadow: 0 2px 8px #e0e0e0;
+}
+.order-shipping {
+  min-width: 140px;
+}
+.order-status {
+  min-width: 180px;
+}
+.timeline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0 8px 0;
+  gap: 0;
+}
+.timeline-step {
+  flex: 1 1 0;
+  text-align: center;
+  padding: 8px 0 4px 0;
+  border-bottom: 4px solid #e0e0e0;
+  color: #bbb;
+  font-weight: 600;
+  font-size: 1.01rem;
+  position: relative;
+  background: none;
+  z-index: 1;
+}
+.timeline-step.active {
+  color: #2563eb;
+  border-bottom: 4px solid #2563eb;
+}
+.timeline-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  width: 16px;
+  height: 4px;
+  background: #e0e0e0;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+.timeline-step.active:not(:last-child)::after {
+  background: #2563eb;
+}
+.order-merchant strong {
+  font-size: 1.08rem;
+  color: #222;
+}
+.order-merchant div {
+  margin-bottom: 2px;
+}
+.order-shipping h3,
+.order-status h3 {
+  color: #2563eb;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.order-shipping div {
+  margin-bottom: 2px;
+}
+.order-shipping div:first-of-type {
+  font-weight: 600;
+  color: #222;
+}
+.order-shipping div:last-of-type {
+  color: #444;
+}
+.track-btn {
+  background: #ff4747;
+  color: #fff;
+  border: 1.5px solid #b91c1c;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, border 0.2s;
+  margin-top: 8px;
+  box-shadow: 0 2px 8px #fca5a5;
+}
+.track-btn:hover {
+  background: #d32f2f;
+  border-color: #7f1d1d;
+}
+@media (max-width: 900px) {
+  .order-content {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}

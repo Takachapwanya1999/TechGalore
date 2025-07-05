@@ -1,82 +1,25 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import logo from './assets/logo.png';
+import socket from '../../utils/socket';
 import './Dashboard.css';
-import logoImg from './assets/logo.png';
+import Navbar from '../../components/Navbar';
+import DashboardCharts from '../../components/DashboardCharts';
 
-const mockProducts = [
-  { 
-    id: 1, 
-    name: 'MacBook Pro M2', 
-    category: 'Laptops', 
-    price: 25999, 
-    stock: 15, 
-    description: 'Latest MacBook Pro with M2 chip',
-    processor: 'Apple M2',
-    ram: '16GB',
-    storage: '512GB SSD',
-    condition: 'New',
-    image: '../../assets/pc.png'
-  },
-  { 
-    id: 2, 
-    name: 'Dell XPS 13', 
-    category: 'Laptops', 
-    price: 18999, 
-    stock: 8, 
-    description: 'Premium ultrabook with 13-inch display',
-    processor: 'Intel i7-1250U',
-    ram: '16GB',
-    storage: '1TB SSD',
-    condition: 'New',
-    image: '../../assets/pc.png'
-  },
-  { 
-    id: 3, 
-    name: 'iPhone 15 Pro', 
-    category: 'Phones', 
-    price: 24999, 
-    stock: 25, 
-    description: 'Latest iPhone with titanium design',
-    processor: 'A17 Pro',
-    ram: '8GB',
-    storage: '256GB',
-    condition: 'New',
-    image: '../../assets/image.png'
-  },
-  { 
-    id: 4, 
-    name: 'Samsung Galaxy S24', 
-    category: 'Phones', 
-    price: 19999, 
-    stock: 12, 
-    description: 'Android flagship with AI features',
-    processor: 'Snapdragon 8 Gen 3',
-    ram: '12GB',
-    storage: '256GB',
-    condition: 'New',
-    image: '../../assets/image.png'
-  },
-  { 
-    id: 5, 
-    name: 'iPad Air', 
-    category: 'Tablets', 
-    price: 14999, 
-    stock: 20, 
-    description: 'Versatile tablet for work and play',
-    processor: 'Apple M1',
-    ram: '8GB',
-    storage: '256GB',
-    condition: 'Used',
-    image: '../../assets/image.png'
-  },
-];
 
-const mockOrders = [
-  { id: 1, customer: 'John Doe', product: 'MacBook Pro M2', status: 'Delivered', date: '2024-01-15', amount: 25999 },
-  { id: 2, customer: 'Jane Smith', product: 'iPhone 15 Pro', status: 'Processing', date: '2024-01-16', amount: 24999 },
-  { id: 3, customer: 'Mike Johnson', product: 'Dell XPS 13', status: 'Shipped', date: '2024-01-17', amount: 18999 },
-  { id: 4, customer: 'Sarah Wilson', product: 'Samsung Galaxy S24', status: 'Pending', date: '2024-01-18', amount: 19999 },
-  { id: 5, customer: 'David Brown', product: 'iPad Air', status: 'Delivered', date: '2024-01-19', amount: 14999 },
-];
+// Fetch real products from backend
+const fetchProductsFromApi = async () => {
+  const res = await fetch('http://localhost:3001/products');
+  if (!res.ok) throw new Error('Failed to fetch products');
+  return res.json();
+};
+
+
+// Fetch real orders from backend
+const fetchOrdersFromApi = async () => {
+  const res = await fetch('http://localhost:3001/orders');
+  if (!res.ok) throw new Error('Failed to fetch orders');
+  return res.json();
+};
 
 const defaultUser = {
   name: 'Technology Galore',
@@ -98,8 +41,29 @@ const conditionOptions = ['New', 'Used', 'Refurbished'];
 
 export default function Dashboard() {
   const [activeSection, setActiveSection] = useState('analytics');
-  const [products, setProducts] = useState(mockProducts);
-  const [orders, setOrders] = useState(mockOrders);
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
+  const [isSidebarHovered, setIsSidebarHovered] = useState(false);
+  const [products, setProducts] = useState([]);
+  // Fetch products from backend on mount
+  useEffect(() => {
+    fetchProductsFromApi()
+      .then(data => setProducts(Array.isArray(data) ? data : []))
+      .catch(() => setProducts([]));
+  }, []);
+  const [orders, setOrders] = useState([]);
+  // Fetch orders from backend on mount and listen for real-time updates
+  useEffect(() => {
+    fetchOrdersFromApi()
+      .then(data => setOrders(Array.isArray(data) ? data : []))
+      .catch(() => setOrders([]));
+    const handleOrdersUpdate = (orders) => {
+      setOrders(Array.isArray(orders) ? orders : []);
+    };
+    socket.on('ordersUpdate', handleOrdersUpdate);
+    return () => {
+      socket.off('ordersUpdate', handleOrdersUpdate);
+    };
+  }, []);
   const [walletBalance, setWalletBalance] = useState(15420.50);
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
@@ -118,51 +82,20 @@ export default function Dashboard() {
   const [showWalletModal, setShowWalletModal] = useState(false);
   const [walletAction, setWalletAction] = useState('');
   const [walletAmount, setWalletAmount] = useState('');
-  const [user, setUser] = useState(defaultUser);
-  const [showProfileModal, setShowProfileModal] = useState(false);
-  const [editProfile, setEditProfile] = useState({ name: user.name, email: user.email, avatar: user.avatar });
-  const [isNavExpanded, setIsNavExpanded] = useState(false);
-
-  const modalRef = useRef(null);
-  const walletModalRef = useRef(null);
-  const profileModalRef = useRef(null);
+  const [user] = useState(defaultUser);
+  // Removed unused: showProfileModal, setShowProfileModal, editProfile, setEditProfile, isNavExpanded, setIsNavExpanded
+  // Removed unused: modalRef, walletModalRef, profileModalRef
 
   const totalRevenue = useMemo(() => orders.reduce((sum, order) => sum + order.amount, 0), [orders]);
   const totalProducts = products.length;
   const totalOrders = orders.length;
   const lowStockProducts = products.filter(p => p.stock < 10).length;
 
+  // Removed unused click outside handler and related state
+
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        setShowAddProduct(false);
-        setEditingProduct(null);
-        setNewProduct({ 
-          name: '', 
-          category: '', 
-          price: '', 
-          stock: '', 
-          description: '', 
-          processor: processorOptions[0], 
-          ram: ramOptions[0], 
-          storage: storageOptions[0], 
-          condition: conditionOptions[0], 
-          image: '' 
-        });
-      }
-      if (walletModalRef.current && !walletModalRef.current.contains(event.target)) {
-        setShowWalletModal(false);
-        setWalletAction('');
-        setWalletAmount('');
-      }
-      if (profileModalRef.current && !profileModalRef.current.contains(event.target)) {
-        setShowProfileModal(false);
-        setEditProfile({ name: user.name, email: user.email, avatar: user.avatar });
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [user]);
+    localStorage.setItem('dashboardOrders', JSON.stringify(orders));
+  }, [orders]);
 
   const handleAddProduct = () => {
     if (newProduct.name && newProduct.category && newProduct.price && newProduct.stock) {
@@ -250,19 +183,7 @@ export default function Dashboard() {
     }
   };
 
-  const handleProfileImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => setEditProfile({ ...editProfile, avatar: event.target.result });
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleProfileSave = () => {
-    setUser({ ...user, ...editProfile });
-    setShowProfileModal(false);
-  };
+  // Removed unused handleProfileImageUpload and handleProfileSave
 
   const closeModal = (modalType) => {
     switch (modalType) {
@@ -411,27 +332,58 @@ export default function Dashboard() {
             <tr>
               <th>Order ID</th>
               <th>Customer</th>
-              <th>Product</th>
+              <th>Product(s)</th>
               <th>Status</th>
               <th>Date</th>
               <th>Amount</th>
             </tr>
           </thead>
           <tbody>
-            {orders.map(order => (
-              <tr key={order.id}>
-                <td>#{order.id}</td>
-                <td>{order.customer}</td>
-                <td>{order.product}</td>
-                <td>
-                  <span className={`status-badge ${order.status.toLowerCase()}`}>
-                    {order.status}
-                  </span>
-                </td>
-                <td>{order.date}</td>
-                <td className="price">R{order.amount.toLocaleString()}</td>
-              </tr>
-            ))}
+            {orders.map(order => {
+              // Support both legacy and new order formats
+              const customer = order.delivery?.name || order.customer || '-';
+              const products = order.items ? order.items.map(i => i.title || i.name).join(', ') : order.product || '-';
+              const status = order.status || 'Getting Ready';
+              const date = order.createdAt ? new Date(order.createdAt).toLocaleDateString() : order.date || '-';
+              let amount = order.total || order.amount || 0;
+              if (typeof amount === 'string') {
+                const parsed = parseFloat(amount);
+                amount = isNaN(parsed) ? 0 : parsed;
+              }
+              return (
+                <tr key={order.id}>
+                  <td>#{order.id}</td>
+                  <td>{customer}</td>
+                  <td>{products}</td>
+                  <td>
+                    <select
+                      className={`status-badge ${status.toLowerCase()}`}
+                      value={status}
+                      onChange={async e => {
+                        const newStatus = e.target.value;
+                        // Update backend
+                        await fetch(`http://localhost:3001/orders/${order.id}`, {
+                          method: 'PATCH',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ status: newStatus })
+                        });
+                        // Update local state
+                        setOrders(orders.map(o =>
+                          o.id === order.id ? { ...o, status: newStatus } : o
+                        ));
+                      }}
+                    >
+                      <option value="Getting Ready">Getting Ready</option>
+                      <option value="Processing">Processing</option>
+                      <option value="Shipped">Shipped</option>
+                      <option value="Delivered">Delivered</option>
+                    </select>
+                  </td>
+                  <td>{date}</td>
+                  <td className="price">R{!isNaN(amount) ? amount.toLocaleString() : '0'}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -464,77 +416,108 @@ export default function Dashboard() {
       case 'products': return renderProducts();
       case 'orders': return renderOrders();
       case 'wallet': return renderWallet();
+      case 'charts':
+        return (
+          <div>
+            <h2 style={{color:'#fff',marginBottom:24}}><span className="material-icons" style={{verticalAlign:'middle'}}>insert_chart</span> Dashboard Charts</h2>
+            <DashboardCharts />
+          </div>
+        );
       default: return renderAnalytics();
     }
   };
 
   return (
     <div className="dashboard-container">
-      <nav className={`sidebar ${isNavExpanded ? 'expanded' : ''}`}
-           onMouseEnter={() => setIsNavExpanded(true)}
-           onMouseLeave={() => setIsNavExpanded(false)}>
+      <Navbar />
+      <div
+        className={`sidebar${isSidebarExpanded || isSidebarHovered ? ' expanded' : ''}`}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          height: '100vh',
+          zIndex: 100,
+          transition: 'width 0.3s',
+          pointerEvents: 'auto',
+        }}
+        onMouseEnter={() => setIsSidebarHovered(true)}
+        onMouseLeave={() => setIsSidebarHovered(false)}
+      >
         <div className="sidebar-header">
-          <img src={logoImg} alt="TechGalore Logo" className="sidebar-logo" />
-          <h1 className="sidebar-title">TechGalore</h1>
+          <img src={logo} alt="Logo" className="sidebar-logo" />
+          <span className="sidebar-title">Dashboard</span>
         </div>
         <ul className="sidebar-menu">
           <li>
-            <button 
-              className={activeSection === 'analytics' ? 'active' : ''} 
-              onClick={() => setActiveSection('analytics')}
-            >
+            <button className={activeSection === 'analytics' ? 'active' : ''} onClick={() => setActiveSection('analytics')}>
               <span className="material-icons">analytics</span>
               <span className="menu-text">Analytics</span>
             </button>
           </li>
           <li>
-            <button 
-              className={activeSection === 'products' ? 'active' : ''} 
-              onClick={() => setActiveSection('products')}
-            >
+            <button className={activeSection === 'products' ? 'active' : ''} onClick={() => setActiveSection('products')}>
               <span className="material-icons">inventory</span>
               <span className="menu-text">Products</span>
             </button>
           </li>
           <li>
-            <button 
-              className={activeSection === 'orders' ? 'active' : ''} 
-              onClick={() => setActiveSection('orders')}
-            >
+            <button className={activeSection === 'orders' ? 'active' : ''} onClick={() => setActiveSection('orders')}>
               <span className="material-icons">shopping_cart</span>
               <span className="menu-text">Orders</span>
             </button>
           </li>
           <li>
-            <button 
-              className={activeSection === 'wallet' ? 'active' : ''} 
-              onClick={() => setActiveSection('wallet')}
-            >
+            <button className={activeSection === 'wallet' ? 'active' : ''} onClick={() => setActiveSection('wallet')}>
               <span className="material-icons">account_balance_wallet</span>
               <span className="menu-text">Wallet</span>
             </button>
           </li>
+          <li>
+            <button className={activeSection === 'charts' ? 'active' : ''} onClick={() => setActiveSection('charts')}>
+              <span className="material-icons">insert_chart</span>
+              <span className="menu-text">Charts</span>
+            </button>
+          </li>
         </ul>
-        <div className="user-profile">
+        <div className="user-profile" style={{ cursor: 'pointer' }} title="Profile (Firebase Auth coming soon)">
           <div className="user-avatar">
-            <img src={user.avatar} alt={user.name} />
+            <img src={user.avatar} alt="User Avatar" />
           </div>
           <div className="user-info">
-            <h3>{user.name}</h3>
-            <p>{user.email}</p>
-            <p className="user-role">{user.role}</p>
+            <h3 style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              {user.name}
+              <span className="material-icons" style={{ fontSize: 18, color: '#4fc3f7' }}>verified_user</span>
+            </h3>
+            <p style={{ fontFamily: 'monospace', fontSize: '0.9em', color: '#b3e5fc' }}>{user.email}</p>
+            <span className="user-role" style={{ color: '#ffd600', fontWeight: 600 }}>{user.role}</span>
           </div>
         </div>
-      </nav>
-
-      <main className="dashboard-main">
+        <button
+          className="sidebar-toggle"
+          onClick={() => setIsSidebarExpanded((prev) => !prev)}
+          style={{ position: 'absolute', top: 16, right: 8, background: 'none', border: 'none', color: '#fff', cursor: 'pointer', zIndex: 3 }}
+          aria-label={isSidebarExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
+        >
+          <span className="material-icons">{isSidebarExpanded ? 'chevron_left' : 'chevron_right'}</span>
+        </button>
+      </div>
+      <main
+        className="dashboard-main"
+        style={{
+          marginTop: '80px',
+          flex: 1,
+          marginLeft: isSidebarExpanded || isSidebarHovered ? 280 : 80,
+          transition: 'margin-left 0.3s',
+        }}
+      >
         {renderSection()}
       </main>
 
       {/* Product Modal */}
       {showAddProduct && (
         <div className="modal-overlay">
-          <div className="modal product-modal" ref={modalRef}>
+          <div className="modal product-modal">
             <div className="modal-header">
               <h2>{editingProduct ? 'Edit Product' : 'Add New Product'}</h2>
               <button className="close-btn" onClick={() => closeModal('product')}>
@@ -667,7 +650,7 @@ export default function Dashboard() {
       {/* Wallet Modal */}
       {showWalletModal && (
         <div className="modal-overlay">
-          <div className="modal wallet-modal" ref={walletModalRef}>
+          <div className="modal wallet-modal">
             <div className="modal-header">
               <h2>
                 <span className="material-icons">

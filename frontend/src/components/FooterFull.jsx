@@ -49,9 +49,23 @@ export default function FooterFull() {
             <div key={col.title}>
               <div style={{ fontWeight: 700, marginBottom: 12, fontSize: '1.08rem', color: '#e5e7eb' }}>{col.title}</div>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                {col.links.map(link => (
-                  <li key={link} style={{ marginBottom: 7, color: '#cbd5e1', fontSize: '1rem', cursor: 'pointer' }}>{link}</li>
-                ))}
+                {col.links.map(link => {
+                  // Make 'Our story' clickable and route to /about
+                  if (link.toLowerCase() === 'our story') {
+                    return (
+                      <li
+                        key={link}
+                        style={{ marginBottom: 7, color: '#cbd5e1', fontSize: '1rem', cursor: 'pointer', textDecoration: 'underline' }}
+                        onClick={() => window.location.href = '/about'}
+                      >
+                        {link}
+                      </li>
+                    );
+                  }
+                  return (
+                    <li key={link} style={{ marginBottom: 7, color: '#cbd5e1', fontSize: '1rem', cursor: 'pointer' }}>{link}</li>
+                  );
+                })}
               </ul>
             </div>
           ))}

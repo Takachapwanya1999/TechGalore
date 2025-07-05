@@ -1,0 +1,46 @@
+.about-carousel-swiper {
+  width: 100%;
+  padding: 0 0 1.5rem 0;
+}
+
+.about-carousel-card {
+  min-width: 260px;
+  max-width: 260px;
+  width: 260px;
+  height: 260px;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(135deg, #e3eefd 0%, #f3f6fa 100%);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.08);
+  padding: 2rem 1.5rem 1.7rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+  border: 1.5px solid #e0e7ef;
+}
+
+.about-carousel-card:hover {
+  box-shadow: 0 8px 32px rgba(37,99,235,0.16);
+  transform: translateY(-6px) scale(1.03);
+}
+
+@media (max-width: 900px) {
+  .about-carousel-card {
+    min-width: 200px;
+    max-width: 200px;
+    width: 200px;
+    height: 200px;
+  }
+}
+@media (max-width: 600px) {
+  .about-carousel-card {
+    min-width: 140px;
+    max-width: 140px;
+    width: 140px;
+    height: 140px;
+    padding: 1rem 0.5rem;
+  }
+}

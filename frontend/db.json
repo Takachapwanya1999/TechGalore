@@ -1,144 +1,272 @@
 {
-  "laptops": [
+  "products": [
     {
       "id": 1,
       "image": "https://m.media-amazon.com/images/I/71TPda7cwUL._AC_SL1500_.jpg",
       "title": "Dell XPS 13 (2022)",
+      "name": "Dell XPS 13 (2022)",
       "price": 16999,
       "condition": "Used",
       "cpu": "Intel i7-1165G7",
+      "processor": "Intel i7-1165G7",
       "ram": "16GB",
-      "storage": "512GB SSD"
+      "storage": "512GB SSD",
+      "stock": 10,
+      "category": "Laptops",
+      "description": "Premium ultrabook with 13-inch display",
+      "details": ["Intel i7-1165G7 • 16GB RAM • 512GB SSD", "Condition: Used"]
     },
     {
       "id": 2,
       "image": "https://m.media-amazon.com/images/I/61jLiCovxVL._AC_SL1500_.jpg",
       "title": "Apple MacBook Pro 14\" (M1)",
+      "name": "Apple MacBook Pro 14\" (M1)",
       "price": 28999,
       "condition": "New",
       "cpu": "Apple M1",
+      "processor": "Apple M1",
       "ram": "16GB",
-      "storage": "1TB SSD"
+      "storage": "1TB SSD",
+      "stock": 8,
+      "category": "Laptops",
+      "description": "Apple's powerful 14-inch MacBook Pro with M1 chip",
+      "details": ["Apple M1 • 16GB RAM • 1TB SSD", "Condition: New"]
     },
     {
       "id": 3,
       "image": "https://m.media-amazon.com/images/I/81m1s4wIPML._AC_SL1500_.jpg",
       "title": "HP Spectre x360",
+      "name": "HP Spectre x360",
       "price": 18999,
       "condition": "Used",
       "cpu": "Intel i5-1135G7",
+      "processor": "Intel i5-1135G7",
       "ram": "8GB",
-      "storage": "256GB SSD"
+      "storage": "256GB SSD",
+      "stock": 12,
+      "category": "Laptops",
+      "description": "Convertible laptop with 360-degree hinge",
+      "details": ["Intel i5-1135G7 • 8GB RAM • 256GB SSD", "Condition: Used"]
     },
     {
       "id": 4,
       "image": "https://m.media-amazon.com/images/I/71pC69I3lzL._AC_SL1500_.jpg",
       "title": "Lenovo ThinkPad X1 Carbon",
+      "name": "Lenovo ThinkPad X1 Carbon",
       "price": 22999,
       "condition": "New",
       "cpu": "Intel i7-1260P",
+      "processor": "Intel i7-1260P",
       "ram": "16GB",
-      "storage": "512GB SSD"
+      "storage": "512GB SSD",
+      "stock": 7,
+      "category": "Laptops",
+      "description": "Business laptop with lightweight carbon fiber body",
+      "details": ["Intel i7-1260P • 16GB RAM • 512GB SSD", "Condition: New"]
     },
     {
       "id": 5,
       "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80",
       "title": "ASUS ZenBook 14 OLED",
+      "name": "ASUS ZenBook 14 OLED",
       "price": 17999,
       "condition": "New",
       "cpu": "AMD Ryzen 7 5800U",
+      "processor": "AMD Ryzen 7 5800U",
       "ram": "16GB",
-      "storage": "1TB SSD"
+      "storage": "1TB SSD",
+      "stock": 15,
+      "category": "Laptops",
+      "description": "Ultra-light laptop with OLED display",
+      "details": ["AMD Ryzen 7 5800U • 16GB RAM • 1TB SSD", "Condition: New"]
     },
     {
       "id": 6,
       "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
       "title": "Acer Swift 3",
+      "name": "Acer Swift 3",
       "price": 13999,
       "condition": "Used",
       "cpu": "Intel i5-1240P",
+      "processor": "Intel i5-1240P",
       "ram": "8GB",
-      "storage": "512GB SSD"
+      "storage": "512GB SSD",
+      "stock": 9,
+      "category": "Laptops",
+      "description": "Affordable ultrabook with long battery life",
+      "details": ["Intel i5-1240P • 8GB RAM • 512GB SSD", "Condition: Used"]
     },
     {
       "id": 7,
       "image": "https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_SL1500_.jpg",
       "title": "Microsoft Surface Laptop 5",
+      "name": "Microsoft Surface Laptop 5",
       "price": 20999,
       "condition": "New",
       "cpu": "Intel i7-1255U",
+      "processor": "Intel i7-1255U",
       "ram": "16GB",
-      "storage": "512GB SSD"
+      "storage": "512GB SSD",
+      "stock": 11,
+      "category": "Laptops",
+      "description": "Sleek laptop with touchscreen and Windows 11",
+      "details": ["Intel i7-1255U • 16GB RAM • 512GB SSD", "Condition: New"]
     },
     {
       "id": 8,
       "image": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80",
       "title": "Razer Blade 15",
+      "name": "Razer Blade 15",
       "price": 31999,
       "condition": "Used",
       "cpu": "Intel i7-11800H",
+      "processor": "Intel i7-11800H",
       "ram": "16GB",
-      "storage": "1TB SSD"
+      "storage": "1TB SSD",
+      "stock": 6,
+      "category": "Laptops",
+      "description": "Gaming laptop with RTX graphics",
+      "details": ["Intel i7-11800H • 16GB RAM • 1TB SSD", "Condition: Used"]
     },
     {
       "id": 9,
       "image": "https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_SL1500_.jpg",
       "title": "MSI Stealth 15M",
+      "name": "MSI Stealth 15M",
       "price": 24999,
       "condition": "New",
       "cpu": "Intel i7-11375H",
+      "processor": "Intel i7-11375H",
       "ram": "16GB",
-      "storage": "512GB SSD"
+      "storage": "512GB SSD",
+      "stock": 13,
+      "category": "Laptops",
+      "description": "Slim gaming laptop with high refresh display",
+      "details": ["Intel i7-11375H • 16GB RAM • 512GB SSD", "Condition: New"]
     },
     {
       "id": 10,
       "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80",
       "title": "ASUS ROG Zephyrus G14",
+      "name": "ASUS ROG Zephyrus G14",
       "price": 27999,
       "condition": "Used",
       "cpu": "AMD Ryzen 9 5900HS",
+      "processor": "AMD Ryzen 9 5900HS",
       "ram": "32GB",
-      "storage": "1TB SSD"
+      "storage": "1TB SSD",
+      "stock": 5,
+      "category": "Laptops",
+      "description": "Compact gaming laptop with powerful specs",
+      "details": ["AMD Ryzen 9 5900HS • 32GB RAM • 1TB SSD", "Condition: Used"]
     },
     {
       "id": 11,
       "image": "https://m.media-amazon.com/images/I/81m1s4wIPML._AC_SL1500_.jpg",
       "title": "HP Envy 13",
+      "name": "HP Envy 13",
       "price": 16999,
       "condition": "New",
       "cpu": "Intel i5-1135G7",
+      "processor": "Intel i5-1135G7",
       "ram": "8GB",
-      "storage": "256GB SSD"
+      "storage": "256GB SSD",
+      "stock": 14,
+      "category": "Laptops",
+      "description": "Portable laptop with long battery life",
+      "details": ["Intel i5-1135G7 • 8GB RAM • 256GB SSD", "Condition: New"]
     },
     {
       "id": 12,
       "image": "https://m.media-amazon.com/images/I/71pC69I3lzL._AC_SL1500_.jpg",
       "title": "Lenovo Yoga 7i",
+      "name": "Lenovo Yoga 7i",
       "price": 18999,
       "condition": "Used",
       "cpu": "Intel i7-1165G7",
+      "processor": "Intel i7-1165G7",
       "ram": "12GB",
-      "storage": "512GB SSD"
+      "storage": "512GB SSD",
+      "stock": 8,
+      "category": "Laptops",
+      "description": "2-in-1 convertible laptop with touch display",
+      "details": ["Intel i7-1165G7 • 12GB RAM • 512GB SSD", "Condition: Used"]
     },
     {
       "id": 13,
       "image": "https://m.media-amazon.com/images/I/61jLiCovxVL._AC_SL1500_.jpg",
       "title": "Apple MacBook Air 13\" (M2)",
+      "name": "Apple MacBook Air 13\" (M2)",
       "price": 21999,
       "condition": "New",
       "cpu": "Apple M2",
+      "processor": "Apple M2",
       "ram": "8GB",
-      "storage": "512GB SSD"
+      "storage": "512GB SSD",
+      "stock": 10,
+      "category": "Laptops",
+      "description": "Lightweight MacBook Air with M2 chip",
+      "details": ["Apple M2 • 8GB RAM • 512GB SSD", "Condition: New"]
     },
     {
       "id": 14,
       "image": "https://m.media-amazon.com/images/I/71TPda7cwUL._AC_SL1500_.jpg",
       "title": "Dell Inspiron 15 3000",
+      "name": "Dell Inspiron 15 3000",
       "price": 10999,
       "condition": "Used",
       "cpu": "Intel i3-1115G4",
+      "processor": "Intel i3-1115G4",
       "ram": "8GB",
-      "storage": "256GB SSD"
+      "storage": "256GB SSD",
+      "stock": 16,
+      "category": "Laptops",
+      "description": "Affordable 15-inch laptop for everyday use",
+      "details": ["Intel i3-1115G4 • 8GB RAM • 256GB SSD", "Condition: Used"]
+    }
+  ],
+  "orders": [
+
+    {
+      "id": "9bfa",
+      "items": [
+        {
+          "id": 3,
+          "image": "https://m.media-amazon.com/images/I/81m1s4wIPML._AC_SL1500_.jpg",
+          "title": "HP Spectre x360",
+          "name": "HP Spectre x360",
+          "price": 18999,
+          "condition": "Used",
+          "cpu": "Intel i5-1135G7",
+          "ram": "8GB",
+          "storage": "256GB SSD",
+          "qty": 1,
+          "details": ["Intel i5-1135G7 • 8GB RAM • 256GB SSD", "Condition: Used"]
+        },
+        {
+          "id": 4,
+          "image": "https://m.media-amazon.com/images/I/71pC69I3lzL._AC_SL1500_.jpg",
+          "title": "Lenovo ThinkPad X1 Carbon",
+          "name": "Lenovo ThinkPad X1 Carbon",
+          "price": 22999,
+          "condition": "New",
+          "cpu": "Intel i7-1260P",
+          "ram": "16GB",
+          "storage": "512GB SSD",
+          "qty": 1,
+          "details": ["Intel i7-1260P • 16GB RAM • 512GB SSD", "Condition: New"]
+        }
+      ],
+      "total": "41998.00",
+      "delivery": {
+        "name": "Paseka Mabitsela",
+        "email": "pasekamabitsela22@gmail.com",
+        "phone": "0838218974",
+        "address": "564 lepelle st ,leeuwkop medium B",
+        "notes": ""
+      },
+      "createdAt": "2025-07-04T12:58:46.120Z",
+      "status": "pending"
     }
   ]
 }

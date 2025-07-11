@@ -11,6 +11,7 @@ const cards = [
     icon: <FaLaptop className="about-icon" />, title: "Wide Selection", desc: "New & certified pre-owned laptops from top brands like Apple, Dell, HP, Lenovo, and more."
   },
   {
+    
     icon: <FaUserShield className="about-icon" />, title: "Peace of Mind", desc: "14-day hassle-free returns and a 6-month warranty on all devices."
   },
   {
